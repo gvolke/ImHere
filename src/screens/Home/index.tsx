@@ -1,33 +1,72 @@
-import { Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
+
+import { Participant } from '../../components/Participant';
 
 import { styles } from './style'
 
 export function Home() {
+    const participants = ['Gustavo', 'Marcos', 'David', 'William', 'Lauro', 'Bruno', 'Matheus', 'Chico', 'Vitor', 'Ilan', 'Thomas Shelby'];
+
     function handleParticipantAdd() {
-        console.log("Você clicou no botão de adicionar")
+        if (participants.includes('Gustavo')) {
+            return Alert.alert('Paricipante duplicado', 'Já existe um participante na lista com esse nome')
+        }
+    }
+
+    function handleParticipantRemove(name: string) {
+        Alert.alert('Remover', `Tem certeza que deseja remover o participante ${name}?`, [
+            {
+                text: 'Sim',
+                onPress: () => Alert.alert("Removido!")
+            },
+            {
+                text: 'Não',
+                style: 'cancel'
+            }
+        ])
     }
 
     return (
         <View style={styles.container}>
-        <Text style={styles.eventName}>
-            Nome do Evento
-        </Text>
-
-        <Text style={styles.eventDate}>
-            Quarta, 6 de Novembro de 2022
-        </Text>
-
-        <TextInput 
-            style={styles.input}
-            placeholder='Nome do Participante'
-            placeholderTextColor="#6B6B6B"
-        />
-
-        <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
-            <Text style={styles.buttonText}>
-                +
+            <Text style={styles.eventName}>
+                Nome do Evento
             </Text>
-        </TouchableOpacity>
+
+            <Text style={styles.eventDate}>
+                Quarta, 6 de Novembro de 2022
+            </Text>
+
+            <View style={styles.form}>
+                <TextInput 
+                    style={styles.input}
+                    placeholder='Nome do Participante'
+                    placeholderTextColor="#6B6B6B"
+                />
+
+                <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+                    <Text style={styles.buttonText}>
+                        +
+                    </Text>
+                </TouchableOpacity>
+            </View>  
+
+            <FlatList
+                data={participants}
+                keyExtractor={item => item}
+                renderItem={({ item }) => (
+                    <Participant 
+                        key={item}
+                        name={item} 
+                        onRemove={() => handleParticipantRemove(item)}
+                    /> 
+                )}
+                showsVerticalScrollIndicator={false}
+                ListEmptyComponent={() => (
+                    <Text style={styles.listEmptyText}>
+                        Ninguém chegou no evento ainda? Adicione participantes à sua lista de presença
+                    </Text>
+                )}
+            />   
         </View>    
     )
 }
