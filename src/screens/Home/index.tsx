@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import { Text, View, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native';
 
 import { Participant } from '../../components/Participant';
@@ -5,19 +6,23 @@ import { Participant } from '../../components/Participant';
 import { styles } from './style'
 
 export function Home() {
-    const participants = ['Gustavo', 'Marcos', 'David', 'William', 'Lauro', 'Bruno', 'Matheus', 'Chico', 'Vitor', 'Ilan', 'Thomas Shelby'];
+    const [participants, setParticipant] = useState<string[]>([]);
+    const [participantName, setParticipantName] = useState('');
 
     function handleParticipantAdd() {
-        if (participants.includes('Gustavo')) {
+        if (participants.includes(participantName)) {
             return Alert.alert('Paricipante duplicado', 'Já existe um participante na lista com esse nome')
         }
+
+        setParticipant(prevState => [...prevState, participantName]);
+        setParticipantName('');
     }
 
-    function handleParticipantRemove(name: string) {
+    function handleParticipantRemove(name: string) {                
         Alert.alert('Remover', `Tem certeza que deseja remover o participante ${name}?`, [
             {
                 text: 'Sim',
-                onPress: () => Alert.alert("Removido!")
+                onPress: () => setParticipant(prevState => prevState.filter(participant => participant !== name))
             },
             {
                 text: 'Não',
@@ -33,7 +38,7 @@ export function Home() {
             </Text>
 
             <Text style={styles.eventDate}>
-                Quarta, 6 de Novembro de 2022
+                Quarta, 6 de Novembro de 2023
             </Text>
 
             <View style={styles.form}>
@@ -41,6 +46,8 @@ export function Home() {
                     style={styles.input}
                     placeholder='Nome do Participante'
                     placeholderTextColor="#6B6B6B"
+                    onChangeText={setParticipantName}
+                    value={participantName}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
