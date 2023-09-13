@@ -9,11 +9,11 @@
 <br>
 
 <div style="display: flex; justify-content: space-between;">  
-  <img alt="projeto Rocketflix com um filme exemplo sendo exibido" src=".github/semParticipantes.jpeg" width="33%">
+  <img alt="projeto Rocketflix com um filme exemplo sendo exibido" src=".github/semParticipantes.jpeg" width="30%">
 
-  <img alt="projeto Rocketflix sem filmes sendo exibidos" src=".github/comParticipantes.jpeg" width="33%">
+  <img alt="projeto Rocketflix sem filmes sendo exibidos" src=".github/comParticipantes.jpeg" width="30%">
 
-  <img alt="projeto Rocketflix sem filmes sendo exibidos" src=".github/removerParticipantes.jpeg" width="33%">
+  <img alt="projeto Rocketflix sem filmes sendo exibidos" src=".github/removerParticipantes.jpeg" width="30%">
 </div>
 
 ## 🚀 Tecnologias
@@ -22,6 +22,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - React Native
 - Expo
+- TypeScript
 - Git e Github
 
 ## 💻 Projeto
